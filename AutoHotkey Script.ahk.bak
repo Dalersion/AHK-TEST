@@ -2,19 +2,11 @@
 ;#Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+#SingleInstance
 
-;Gui, Font, S18 CDefault Bold, Verdana
-;Gui, Add, Progress, x44 y289 w300 h30 , 25
-;Gui, Add, Text, x49 y79 w290 h50 , Загрузка
-;Gui, Add, GroupBox, x22 y19 w340 h320 , GroupBox
-;Gui, Font, S18 CDefault Bold, Verdana
-;Gui, Font, S18 CDefault Bold Underline Strike, Verdana
-;Gui, Add, Slider, x39 y209 w310 h30 , 25
-;Gui, Add, Picture, x-8 y-1 w400 h370 , C:\Users\Dalersion\Downloads\1340774.jpg
-; Generated using SmartGUI Creator for SciTE
-;Gui, Show, w387 h365, Untitled GUI
-;return
-	SetTimer, downloaded, 5000
+	SetTimer, downloaded, 3000
+	SetTimer, 1ms, 1
+	SetTimer, 1ms, off
 	;SetTimer, downloaded, 1000
 	;Gui, Add, Progress, x39 y284 w300 h30 , 
 	;Gui, Add, Slider, x34 y204 w310 h30 , 
@@ -33,6 +25,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	UrlDownloadToFile, https://i.imgur.com/kCq2ICl.jpg, 1.jpg
 	;#Include 142.ahk
 	;downloaded=1
+	sleep, 750
 	Gui, hide
 	return
 downloaded:
@@ -41,9 +34,10 @@ downloaded:
 	;Gui, Add, Picture, x2 y-1 w600 h450 , F:\Фоточки\Фотографии на стене сообщества\134-DKdYMlnTn3s.jpg
 	Gui, Font, S10 CDefault Bold , Verdana
 	Gui, Add, Button, x202 y339 w250 h70 g11, Пока
-	Gui, Add, Edit, x12 y19 w180 h40 , Edit
+	Gui, Add, Button, x462 y279 w100 h30 g12, Показать что введено
+	Gui, Add, Edit, x12 y19 w180 h40 vedit1, Edit
 	Gui, Add, GroupBox, x2 y-1 w210 h300 , Пиздос
-	Gui, Add, Text, x282 y-1 w270 h40 , Huli na jopu smotrish'?
+	Gui, Add, Text, x282 y-1 w270 h40 , Huli na jopu smotrish'?   %edit2%
 	; Generated using SmartGUI Creator for SciTE
 	Gui, Show, w606 h451, MainGui
 	SetTimer, downloaded, off
@@ -52,6 +46,28 @@ downloaded:
 GuiClose:
 ExitApp
 
+1ms:
+	SetTimer, downloaded, on
+	return
 
+13:
+	GuiControlGet, edit2
+	SetTimer, 1ms, on
+	SetTimer,1ms, off
+
+12:
+	GuiControlGet, edit1
+	GuiControl, hide
+	Gui, Add, Picture, x2 y-1 w600 h450 , %A_ScriptDir%\1.jpg
+	;Gui, Add, Picture, x2 y-1 w600 h450 , F:\Фоточки\Фотографии на стене сообщества\134-DKdYMlnTn3s.jpg
+	Gui, Font, S10 CDefault Bold , Verdana
+	Gui, Add, Button, x202 y339 w250 h70 g13, Пока
+	;Gui, Add, Button, x462 y279 w100 h30 g12, Показать что введено
+	Gui, Add, Edit, x12 y19 w180 h40 vedit2, %edit1%
+	Gui, Add, GroupBox, x2 y-1 w210 h300 , Пиздос
+	Gui, Add, Text, x282 y-1 w270 h40 , Huli na jopu smotrish?'  Ты написал %edit1%?
+	; Generated using SmartGUI Creator for SciTE
+	Gui, Show, w606 h451, MainGui
+	return
 11:
 	ExitApp
