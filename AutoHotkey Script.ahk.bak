@@ -4,14 +4,14 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance
 
-	SetTimer, downloaded, 3000
+	
 	SetTimer, 1ms, 1
 	SetTimer, 1ms, off
 	;SetTimer, downloaded, 1000
 	;Gui, Add, Progress, x39 y284 w300 h30 , 
 	;Gui, Add, Slider, x34 y204 w310 h30 , 
-	UrlDownloadToFile, https://i.imgur.com/ErVe7ct.jpg, 2.jpg
-	Gui, Add, Picture, x-8 y-11 w400 h380 , %A_ScriptDir%\2.jpg
+	UrlDownloadToFile, https://i.imgur.com/ErVe7ct.jpg, resources\2.jpg
+	Gui, Add, Picture, x-8 y-11 w400 h380 , %A_ScriptDir%\resources\2.jpg
 	;Gui, Add, Picture, x-8 y-1 w400 h370 , C:\Users\Dalersion\Downloads\1340774.jpg
 
 	Gui, Add, Text, x452 y519 w360 h130 , Text
@@ -22,15 +22,16 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	Gui, Font, S15 CDefault Bold, Verdana
 	; Generated using SmartGUI Creator for SciTE
 	Gui, Show, w381 h359, Подгрузка скрипта
-	UrlDownloadToFile, https://i.imgur.com/kCq2ICl.jpg, 1.jpg
+	UrlDownloadToFile, https://i.imgur.com/kCq2ICl.jpg, resources\1.jpg
+	;UrlDownloadToFile, ssilka, file.rasshrenie
 	;#Include 142.ahk
 	;downloaded=1
-	sleep, 750
 	Gui, hide
-	return
+	SetTimer, 1ms, on
+	
 downloaded:
 	Gui, hide
-	Gui, Add, Picture, x2 y-1 w600 h450 , %A_ScriptDir%\1.jpg
+	Gui, Add, Picture, x2 y-1 w600 h450 , %A_ScriptDir%\resources\1.jpg
 	;Gui, Add, Picture, x2 y-1 w600 h450 , F:\Фоточки\Фотографии на стене сообщества\134-DKdYMlnTn3s.jpg
 	Gui, Font, S10 CDefault Bold , Verdana
 	Gui, Add, Button, x202 y339 w250 h70 g11, Пока
@@ -47,7 +48,9 @@ GuiClose:
 ExitApp
 
 1ms:
-	SetTimer, downloaded, on
+	SetTimer, 1ms, off
+	SetTimer, downloaded, 1
+	SetTimer, downloaded, off
 	return
 
 13:
@@ -57,7 +60,7 @@ ExitApp
 
 12:
 	GuiControlGet, edit1
-	GuiControl, hide
+	Gui, hide
 	Gui, Add, Picture, x2 y-1 w600 h450 , %A_ScriptDir%\1.jpg
 	;Gui, Add, Picture, x2 y-1 w600 h450 , F:\Фоточки\Фотографии на стене сообщества\134-DKdYMlnTn3s.jpg
 	Gui, Font, S10 CDefault Bold , Verdana
@@ -71,3 +74,8 @@ ExitApp
 	return
 11:
 	ExitApp
+return
+
+1::
+	MsgBox, 48, Пиздец, Ты пидор
+return

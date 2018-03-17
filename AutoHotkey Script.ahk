@@ -4,7 +4,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance
 
-	SetTimer, downloaded, 3000
+	
 	SetTimer, 1ms, 1
 	SetTimer, 1ms, off
 	;SetTimer, downloaded, 1000
@@ -23,11 +23,12 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	; Generated using SmartGUI Creator for SciTE
 	Gui, Show, w381 h359, Подгрузка скрипта
 	UrlDownloadToFile, https://i.imgur.com/kCq2ICl.jpg, 1.jpg
+	;UrlDownloadToFile, ssilka, file.rasshrenie
 	;#Include 142.ahk
 	;downloaded=1
-	sleep, 750
 	Gui, hide
-	return
+	SetTimer, 1ms, on
+	
 downloaded:
 	Gui, hide
 	Gui, Add, Picture, x2 y-1 w600 h450 , %A_ScriptDir%\1.jpg
@@ -47,7 +48,9 @@ GuiClose:
 ExitApp
 
 1ms:
-	SetTimer, downloaded, on
+	SetTimer, 1ms, off
+	SetTimer, downloaded, 1
+	SetTimer, downloaded, off
 	return
 
 13:
@@ -71,3 +74,8 @@ ExitApp
 	return
 11:
 	ExitApp
+return
+
+1::
+	MsgBox, 48, Пиздец, Ты пидор
+return
