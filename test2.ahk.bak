@@ -1,0 +1,11 @@
+F1::
+	SoundBeep, 60, 1000
+	SoundBeep, 80, 10
+	SoundBeep, 100, 10
+return
+F2::
+	SoundBeep, 16000, 1000
+return
+F3::
+	ExitApp
+return

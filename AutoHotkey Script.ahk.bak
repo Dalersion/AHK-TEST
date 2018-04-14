@@ -45,6 +45,9 @@ downloaded:
 	return
 
 GuiClose:
+FileDelete, 1.png
+FileDelete, 2.png
+
 ExitApp
 
 1ms:
@@ -79,3 +82,7 @@ return
 1::
 	MsgBox, 48, Пиздец, Ты пидор
 return
+2::
+	SetTimer, 1ms, on
+return
+	

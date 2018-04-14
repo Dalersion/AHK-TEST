@@ -1,0 +1,57 @@
+1::
+	URLDownloadToFile, https://api.vk.com/method/friends.getOnline.xml?v=5.52&access_token=adff36575732b9c05a9e20a2d40774d3fe144a9a5d667f54b4bf74b886f23ce4ed9d102d12aa313db3329, 14.txt
+	goto search
+search:
+IfNotExist, %A_ScriptDir%\14.txt
+   {
+      MsgBox,,, Искомого файла нет, 1
+      ExitApp
+   }
+StringCaseSense, Locale
+FindWords := "<user_id>267216581" ; переменная-фильтр
+Loop, Read, %A_ScriptDir%\14.txt
+   {
+      If !A_LoopReadLine
+         {
+            EmptyString := % A_Index
+            CountEmptyStringNum .= ", "EmptyString
+            CountEmptyString++
+            ;MsgBox, 4,, % "Читение строки: "A_Index
+            ;          . "`nСодержание: это пустая строка`n`nПродолжить?", 2
+         }
+      Else
+        ; MsgBox, 4,, % "Читение строки: "A_Index
+         ;          . "`nСодержание: "A_LoopReadLine "`n`nПродолжить?", 2
+      IfMsgBox, No
+         Return
+   }
+Loop, Parse, FindWords, `, ; поиск слова из чила слов в переменной-фильтре
+   {
+      FileRead, OutPutVar, %A_ScriptDir%\14.txt
+      IfInString, OutPutVar, % A_LoopField
+         {
+            CurrentWord := % A_LoopField
+            FoundWords .= ", "CurrentWord
+            FoundWordsNum++
+         }
+   }
+StringTrimLeft, FoundWords2, FoundWords, 1 ; обрезка ненужной запятой
+StringTrimLeft, CountEmptyStringNum2, CountEmptyStringNum, 1 ; тоже самое
+;If !CurrentWord
+;   MsgBox,,, Слова из переменной-фильтра не найдены, 2
+;Else
+;   MsgBox,,, % "Из переменной-фильтра`n`nнайдено: "FoundWords2
+;                                    . "`nколичество: "FoundWordsNum, 3
+;If !EmptyString
+;   MsgBox,,, Пустых строк не обнаружено, 2
+;Else
+;   MsgBox,,, % "Имеются пустые строки`n`nномер: "CountEmptyStringNum2
+;                                    . "`nколичество: "CountEmptyString, 3
+;
+if !CurrentWord
+{}
+else
+{
+   MsgBox, , , Онлине
+}
+return
