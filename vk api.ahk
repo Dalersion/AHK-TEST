@@ -1,5 +1,33 @@
+;Gui, Add, Text, x22 y509 w740 h110 , надо крч получить тут token
+;Gui, Add, Edit, x22 y9 w420 h40 ,https://api.vk.com/method/friends.getOnline.xml?v=5.52&access_token=3aa5c203959564955765a5c9cac5fe497c8b97856b32b3adb017d5edaca6c59b8f3bae91a45c20bb41cf5, 14.txt 
+;Gui, Add, Button, x182 y299 w100 h30 , Button
+;Gui, Add, Text, x32 y119 w100 h30 , надо крч получить тут token
+; Generated using SmartGUI Creator for SciTE
+;Gui, Show, w479 h379, Untitled GUI
+;return
+
+;GuiClose:
+;ExitApp
+
+;Gui, Add, Text, x17 y504 w740 h110 , надо крч получить тут token
+Gui, Add, Edit, x17 y4 w420 h40 , https://api.vk.com/method/friends.getOnline.xml?v=5.52&access_token=3aa5c203959564955765a5c9cac5fe497c8b97856b32b3adb017d5edaca6c59b8f3bae91a45c20bb41cf5`, 14.txt
+Gui, Add, Button, x177 y294 w100 h30 , Button
+;Gui, Add, Text, x27 y114 w100 h30 , надо крч получить тут token
+Gui, Add, Text, x12 y69 w220 h30 , надо крч получить тут token
+Gui, Add, Edit, x22 y159 w150 h30 , token суда
+; Generated using SmartGUI Creator for SciTE
+Gui, Show, w473 h373, Untitled GUI
+return
+
+GuiClose:
+ExitApp 
+
+
+
+;https://api.vk.com/method/friends.getOnline.xml?v=5.52&access_token=3aa5c203959564955765a5c9cac5fe497c8b97856b32b3adb017d5edaca6c59b8f3bae91a45c20bb41cf5, 14.txt 
+token :=3aa5c203959564955765a5c9cac5fe497c8b97856b32b3adb017d5edaca6c59b8f3bae91a45c20bb41cf5
 1::
-	URLDownloadToFile, https://api.vk.com/method/friends.getOnline.xml?v=5.52&access_token=adff36575732b9c05a9e20a2d40774d3fe144a9a5d667f54b4bf74b886f23ce4ed9d102d12aa313db3329, 14.txt
+	URLDownloadToFile, https://api.vk.com/method/friends.getOnline.xml?v=5.52&access_token=%token%, 14.txt
 	goto search
     return
     
@@ -51,9 +79,12 @@ StringTrimLeft, CountEmptyStringNum2, CountEmptyStringNum, 1 ; тоже самое
 ;                                    . "`nколичество: "CountEmptyString, 3
 ;
 if !CurrentWord
-{}
+{
+   MsgBox, , , Не онлине
+}
 else
 {
-   MsgBox, , , Онлине
+   MsgBox, , , Онлине ; Тестовый мсг, не хочу убирать, вдруг поможет потом, тут гуи правильно ставить
+   
 }
 return
