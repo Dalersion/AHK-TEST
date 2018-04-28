@@ -31,6 +31,7 @@ token :=3aa5c203959564955765a5c9cac5fe497c8b97856b32b3adb017d5edaca6c59b8f3bae91
 	goto search
     return
     
+goto search
 search:
 IfNotExist, %A_ScriptDir%\14.txt
    {
