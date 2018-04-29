@@ -3,7 +3,6 @@
 #Include 1.inc			;Cipher(Text, Key1, Key2, Key3) -шифр      Cipher(Shifr, Key3, Key2, Key1)-дешифр
 #Include 2.inc			;keys(key1, key2 , key3)
 #Include 3.inc			;key("pizdec",key1337, key2337, key3337)
-#Include 4.inc			;gkey(outvar, number)
 
 ;===========================INCLUDES END===============================
 
@@ -18,24 +17,22 @@ key3 := key("decpiz",key1337, key2337, key3337)
 ;==============================Var's END================================
 
 
-;==============================Keys===================================
+/*;==============================Keys's===================================
 
-;key1=Nastya
-;KEY2=52669
-;key3=autohotkeyforever!
-IniWrite, %key1%, keys.ini, shifri, key1
-IniWrite, %key2%, keys.ini, shifri, key2
-IniWrite, %key3%, keys.ini, shifri, key3
+key1=Nastya
+KEY2=52669
+key3=autohotkeyforever!
 
-;==============================Keys END=================================
+;==============================Keys's END===============================
+*/
 
 
-;================================GUI=====================================	
+;================================GUI=====================================
 
 Gui, Font, S12 CDefault Bold Underline, Verdana
 Gui, Add, Picture, x-18 y0 w270 h270 , C:\Users\Dalersion\Desktop\дизайн2.jpg
-Gui, Add, Edit, x42 y40 w140 h70  VTEXT, Ваше сообшение
-Gui, Add, Button, x57 y225 w120 h30 gBOK , Отправить
+Gui, Add, Edit, x42 y40 w140 h70  VTEXT, Ваш шифр
+Gui, Add, Button, x57 y225 w120 h30 gBOK , дешировать
 Gui, Show, w238 h268, Untitled GUI
 ;Gui, Add, Edit, x2 y0 w260 h160  vTEXT,  Ваше сообшение
 ;Gui, Add, Button, x62 y160 w120 h30 gBOK , Отправить
@@ -47,7 +44,9 @@ return
 
 ;==============================gui end===================================
 
-
+IniWrite, %key1%, keys.ini, shifri, key1
+IniWrite, %key2%, keys.ini, shifri, key2
+IniWrite, %key3%, keys.ini, shifri, key3
 
 /*==============================GUI2=====================================
 
@@ -71,6 +70,7 @@ GuiClose:
 ExitApp
 */
 
+
 ;=============================Functions=================================
 
 GuiClose:
@@ -79,9 +79,9 @@ return
 
 BOK:
 	GuiControlGet, TEXT
-	;MsgBox, , ,%text%
-	hash:= Cipher(Text, Key1, Key2, Key3)
-	;MsgBox, , ,%hash%
+	MsgBox, , ,%text%
+	hash:= Cipher(Text, Key3, Key2, Key1)
+	MsgBox, , ,%hash%
 
 	ComObjError(false)
 	whr := ComObjCreate("WinHttp.WinHttpRequest.5.1")
@@ -91,8 +91,7 @@ BOK:
 	whr.SetRequestHeader("Content-Type","application/x-www-form-urlencoded")
 	whr.Send()
 	whr.WaitForResponse(60)
-	if (whr.Status != 200)
-	{
+	if (whr.Status != 200) {
 		return
 	}
 	MsgBox, % whr.ResponseText
