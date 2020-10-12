@@ -20,7 +20,7 @@ key3 := key("decpiz",key1337, key2337, key3337)
 
 ;==============================Keys===================================
 
-;key1=Nastya
+	;key1=Nastya
 ;KEY2=52669
 ;key3=autohotkeyforever!
 IniWrite, %key1%, keys.ini, shifri, key1
