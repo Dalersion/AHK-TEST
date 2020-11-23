@@ -223,7 +223,6 @@ paths["/sleep"] := Func("sleep")
 paths["/reload"] := Func("reload")
 paths["/shortcuter"] := Func("shortcuter")
 paths["/video"] := Func("video")
-paths["/404.jpg"] := Func("404_img")
 paths["404"] := Func("NotFound")
 
 server := new HttpServer()
@@ -269,17 +268,6 @@ fav2(ByRef req, ByRef res,ByRef server)
 {
 	loggg(A_ThisFunc)
 	path := "icon3.png"
-	server.ServeFile(res,path)
-	mime:=server.GetMimeType(path)
-	response.headers["Content-Type"]:=mime
-	res.status := 200
-	return
-}
-
-404_img(ByRef req, ByRef res,ByRef server)
-{
-	loggg(A_ThisFunc)
-	path := "404.jpg"
 	server.ServeFile(res,path)
 	mime:=server.GetMimeType(path)
 	response.headers["Content-Type"]:=mime

@@ -275,7 +275,6 @@ fav2(ByRef req, ByRef res,ByRef server)
 	res.status := 200
 	return
 }
-
 404_img(ByRef req, ByRef res,ByRef server)
 {
 	loggg(A_ThisFunc)

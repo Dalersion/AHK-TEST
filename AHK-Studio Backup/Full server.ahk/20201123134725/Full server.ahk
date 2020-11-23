@@ -13,7 +13,7 @@ start_time:=A_Now
 SetTimer, reload, 3600000
 SetTimer, 1st, 1800000
 ;SetTimer, 1st, 30000
-URLDownloadToFile,https://i.imgur.com/kCq2ICl.jpg, 404.jpg
+
 OnExit("exitt")
 
 IfNotExist, %A_AppData%/Dalersion
@@ -45,13 +45,12 @@ IfNotExist, %A_AppData%/Dalersion
 }
 FileAppend, App starting`n, %A_AppData%\Dalersion\logs\log%start_time%.txt
 FileInstall, icon2.ico, %A_AppData%/Dalersion/helper_ico.ico,1
-FileInstall, hello.html, %A_ScriptDir%/hello.html,1
-FileInstall, wrong_pass.html, %A_ScriptDir%/wrong_pass.html,1
-FileInstall, 404.html, %A_ScriptDir%/404.html,1
-FileInstall, input.html, %A_ScriptDir%/input.html,1
-FileInstall, input2.html, %A_ScriptDir%/input2.html,1
-FileInstall, input3.html, %A_ScriptDir%/input3.html,1
-FileInstall, sucess.html, %A_ScriptDir%/sucess.html,1
+FileInstall, hello.html, %A_ScriptDir%/hello.html
+FileInstall, wrong_pass.html, %A_ScriptDir%/wrong_pass.html
+FileInstall, 404.html, %A_ScriptDir%/404.html
+FileInstall, .html, %A_ScriptDir%/.html
+FileInstall, .html, %A_ScriptDir%/.html
+FileInstall, .html, %A_ScriptDir%/.html
 menu, tray, icon, %A_AppData%/Dalersion/helper_ico.ico
 /*
 	IniRead,tray_number, %A_AppData%/Dalersion/ShortCuter/settings.ini,1, numb
@@ -223,7 +222,6 @@ paths["/sleep"] := Func("sleep")
 paths["/reload"] := Func("reload")
 paths["/shortcuter"] := Func("shortcuter")
 paths["/video"] := Func("video")
-paths["/404.jpg"] := Func("404_img")
 paths["404"] := Func("NotFound")
 
 server := new HttpServer()
@@ -269,17 +267,6 @@ fav2(ByRef req, ByRef res,ByRef server)
 {
 	loggg(A_ThisFunc)
 	path := "icon3.png"
-	server.ServeFile(res,path)
-	mime:=server.GetMimeType(path)
-	response.headers["Content-Type"]:=mime
-	res.status := 200
-	return
-}
-
-404_img(ByRef req, ByRef res,ByRef server)
-{
-	loggg(A_ThisFunc)
-	path := "404.jpg"
 	server.ServeFile(res,path)
 	mime:=server.GetMimeType(path)
 	response.headers["Content-Type"]:=mime
@@ -660,7 +647,7 @@ video(ByRef req, ByRef res,ByRef server)
 	</body>
 </html>
 		)
-			FileAppend, %responsetext%, video.html
+			FileAppend, %responsetext%, redir.html
 			path := "redir.html"
 			server.ServeFile(res,path)
 			mime:=server.GetMimeType(path)

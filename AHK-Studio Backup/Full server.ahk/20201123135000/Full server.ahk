@@ -13,7 +13,7 @@ start_time:=A_Now
 SetTimer, reload, 3600000
 SetTimer, 1st, 1800000
 ;SetTimer, 1st, 30000
-URLDownloadToFile,https://i.imgur.com/kCq2ICl.jpg, 404.jpg
+
 OnExit("exitt")
 
 IfNotExist, %A_AppData%/Dalersion
@@ -223,7 +223,6 @@ paths["/sleep"] := Func("sleep")
 paths["/reload"] := Func("reload")
 paths["/shortcuter"] := Func("shortcuter")
 paths["/video"] := Func("video")
-paths["/404.jpg"] := Func("404_img")
 paths["404"] := Func("NotFound")
 
 server := new HttpServer()
@@ -269,17 +268,6 @@ fav2(ByRef req, ByRef res,ByRef server)
 {
 	loggg(A_ThisFunc)
 	path := "icon3.png"
-	server.ServeFile(res,path)
-	mime:=server.GetMimeType(path)
-	response.headers["Content-Type"]:=mime
-	res.status := 200
-	return
-}
-
-404_img(ByRef req, ByRef res,ByRef server)
-{
-	loggg(A_ThisFunc)
-	path := "404.jpg"
 	server.ServeFile(res,path)
 	mime:=server.GetMimeType(path)
 	response.headers["Content-Type"]:=mime
