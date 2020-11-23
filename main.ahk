@@ -8,8 +8,8 @@ bunnyhop = 0
 #InstallMouseHook
 #KeyHistory 10
 #SingleInstance,Force
-#Include %A_ScriptDir%\functions.ahk
-#Include %A_ScriptDir%\hotkeys.ahk
+#Include functions.ahk
+#Include hotkeys.ahk
 
 tpr:
 {
@@ -29,7 +29,7 @@ MainGui:
 {
 	game = 0
 	;Gui, Add, Picture, x-8 y-1 w280 h460  , C:\Users\Dalersion\Desktop\рандомные картинки\iogahn link.png
-	;Gui, Add, Picture, x-8 y-1 w280 h460 border , %A_ScriptDir%\resources\menu.png
+	Gui, Add, Picture, x-8 y-1 w280 h460 border , %A_ScriptDir%\resources\menu.png
 	Gui, Add, Picture, x235 y-1 w40 h40 gExit , %A_ScriptDir%\resources\exit.jpg
 	Gui, Add, Picture, x52 y49 w160 h80 gGame1  , %A_ScriptDir%\resources\csgo0.jpg
 	Gui, Add, Picture, x22 y139 w230 h90 gGame2 , %A_ScriptDir%\resources\HW0.jpg

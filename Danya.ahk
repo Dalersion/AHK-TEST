@@ -6,11 +6,12 @@ DetectHiddenWindows, on
 
 
 
-main()
+main(wParam, lParam, msg, hwnd)
 {
-	MsgBox,,,Даня присоединился к чату
-	SendMessage, 0x1002,,,, ahk_id 0xFFFF
+	MsgBox,,,Даня присоединился к чату %wParam% %lParam% %msg% %hwnd%
+	SendMessage, 0x1002,235,236,,, ahk_id 0xFFFF
+	SendMessage, 0x1002,235,236,,, Nelli
 	return
 }
 
-OnMessage(0x1001,"main")
+OnMessage(0x1001,main)

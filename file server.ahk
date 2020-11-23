@@ -6,7 +6,16 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Include <AHKhttp>
 #Include <AHKsock>
 #Include <console>
+#Include <AES crypt>
+if( %1% = auto)
+{
+	crypt = 0
+}
+else
+{
+	InputBox,crypt, Загадка дыры, Шифровать ли название через AES алгоритм.`nПо стандарту не шифруется`n1 - шифровать`n0 - не шифровать,,,,,,,,0
 
+}
 loggg(str)
 {	
 	global cons_Hidded
@@ -29,7 +38,8 @@ loop, G:\фоточки\*.wmv
 	FileList = %FileList%%A_LoopFileName%`n
 loop, G:\фоточки\*.avi
 	FileList = %FileList%%A_LoopFileName%`n
-
+IniRead, bit, %A_AppData%/Dalersion/porner.ini, Misc, bit
+IniRead, aeskey, %A_AppData%/Dalersion/porner.ini, Misc, key
 ;Pause,On
 Loop, parse, FileList, `n
 {
@@ -37,13 +47,23 @@ Loop, parse, FileList, `n
 		continue
 		;FileList = %FileList%`n
 	global ini_nimber
-	IniWrite, %A_LoopField%, %A_AppData%/Dalersion/porner.ini,List,%ini_nimber%
+	global key
+	global bit
+	if(crypt = 1)
+	{
+		write:=AES.Encrypt(A_LoopField, aeskey, bit)
+		IniWrite, %write%, %A_AppData%/Dalersion/porner.ini,List,%ini_nimber%
+	}
+	else
+	{
+		IniWrite, %A_LoopField%, %A_AppData%/Dalersion/porner.ini,List,%ini_nimber%
+	}
 	ini_nimber:= ini_nimber + 1
-	IniWrite, %ini_nimber%, %A_AppData%/Dalersion/porner.ini, Number, 1
+	IniWrite, %ini_nimber%, %A_AppData%/Dalersion/porner.ini, Misc, 1
 }
 
 ini_nimber := ini_nimber - 1
-IniWrite, %ini_nimber%, %A_AppData%/Dalersion/porner.ini, Number, 1
+IniWrite, %ini_nimber%, %A_AppData%/Dalersion/porner.ini, Misc, 1
 
 paths := {}
 paths["/rand"] := Func("porn")
@@ -55,7 +75,7 @@ paths["/ini.ini"] := Func("UploadIni")
 server := new HttpServer()
 server.LoadMimes(A_ScriptDir . "/mime.types")
 server.SetPaths(paths)
-server.Serve(8080)
+server.Serve(8090)
 loggg("Сервер Стартовал")
 return 
 
@@ -70,9 +90,15 @@ porn(ByRef request, ByRef response)
 	global server
 	global mime
 	global numb
+	global aeskey
+	global bit
 	Random,numb,0,%ini_nimber%
-	IniRead, Vname, %A_AppData%/Dalersion/porner.ini, list, %numb%  ;G:\фоточки\%Vname%
-	Vname = G:\фоточки\%Vname%
+	IniRead, Vname1, %A_AppData%/Dalersion/porner.ini, list, %numb%  ;G:\фоточки\%Vname%
+	if(crypt = 1)
+	{
+		Vname1:=aes.Decrypt(Vname1, aeskey,bit)
+	}
+	Vname = G:\фоточки\%Vname1%
 	mime:=server.GetMimeType(Vname)
 	response.headers["Content-Type"]:=mime
 	server.ServeFile(response, Vname)
@@ -88,9 +114,15 @@ porne(ByRef request, ByRef response)
 	global Vname
 	global server
 	global mime
+	global aeskey
+	global bit
 	numb:= request.queries["numb"]  
-	IniRead, Vname, %A_AppData%/Dalersion/porner.ini, list, %numb%
-	Vname = G:\фоточки\%Vname%
+	IniRead, Vname1, %A_AppData%/Dalersion/porner.ini, list, %numb%
+	if(crypt = 1)
+	{
+		Vname1:=aes.Decrypt(Vname1, aeskey,bit)
+	}
+	Vname = G:\фоточки\%Vname1%
 	mime:=server.GetMimeType(Vname)
 	response.headers["Content-Type"]:=mime
 	server.ServeFile(response, Vname)
@@ -107,8 +139,14 @@ porner(ByRef request, ByRef response)
 	global server
 	global mime
 	global responsetext
+	global aeskey
+	global bit
 	numb:= request.queries["numb"]  
 	IniRead, Vname1, %A_AppData%/Dalersion/porner.ini, list, %numb%
+	if(crypt = 1)
+	{
+		Vname1:=aes.Decrypt(Vname1, aeskey,bit)
+	}
 	Vname = G:\фоточки\%Vname1%
 	responsetext = 
 	(
@@ -130,8 +168,14 @@ pornere(ByRef request, ByRef response)
 	global Vname
 	global server
 	global mime
+	global aeskey
+	global bit
 	numb:= request.queries["numb"]
 	IniRead, Vname1, %A_AppData%/Dalersion/porner.ini, list, %numb%
+	if(crypt = 1)
+	{
+		Vname1:=aes.Decrypt(Vname1, aeskey,bit)
+	}
 	Vname = G:\фоточки\%Vname1%
 	FileDelete, 1.html
 	responsetext = 

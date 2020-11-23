@@ -1,8 +1,6 @@
 ﻿#NoEnv 
 
-PATH_OVERLAY := RelToAbs(A_ScriptDir, "\bin\dx9_overlay.dll")
-;
-
+PATH_OVERLAY := RelToAbs(A_ScriptDir, "..\..\bin\dx9_overlay.dll")
 
 hModule := DllCall("LoadLibrary", Str, PATH_OVERLAY)
 if(hModule == -1 || hModule == 0)

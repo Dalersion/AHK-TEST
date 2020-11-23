@@ -4,18 +4,17 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 DetectHiddenWindows, on
 
-main()
+main(wParam, lParam, msg, hwnd)
 {
-	MsgBox,,,Нелли присоединилась к чату
+	MsgBox,,,Нелли присоединилась к чату %wParam% %lParam% %msg% %hwnd%
 	return
 }
 
 
 
-OnMessage(0x1002,"main")
+OnMessage(0x1002,main)
 
 
 F1::
-;SendMessage,0x1001,,,,Danya
-SendMessage, 0x1001,,,, ahk_id 0xFFFF
-jop := Log(1000)
+SendMessage,0x1001,235,236,,Danya
+SendMessage, 0x1001,235,236,, ahk_id 0xFFFF

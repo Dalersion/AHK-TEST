@@ -1,4 +1,4 @@
-#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+п»ї#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ;#Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -16,13 +16,12 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 	Gui, Add, Text, x452 y519 w360 h130 , Text
 	Gui, Font, S15 CDefault Bold , Verdana
-	Gui, Add, Text, x133 y9 w110 h30 , Загрузка
+	Gui, Add, Text, x133 y9 w110 h30 , Р—Р°РіСЂСѓР·РєР°
 	Gui, Add, Progress, x42 y319 w300 h30 , 25
-	;Gui, Add, GroupBox, x32 y29 w320 h280 , Тип жопа
+	;Gui, Add, GroupBox, x32 y29 w320 h280 , РўРёРї Р¶РѕРїР°
 	Gui, Font, S15 CDefault Bold, Verdana
 	; Generated using SmartGUI Creator for SciTE
-	Gui, Show, w381 h359, Подгрузка скрипта
-	UrlDownloadToFile, https://i.imgur.com/5TIoABL.jpg, 0.jpg
+	Gui, Show, w381 h359, РџРѕРґРіСЂСѓР·РєР° СЃРєСЂРёРїС‚Р°
 	UrlDownloadToFile, https://i.imgur.com/5TIoABL.jpg, 0.jpg
 	;UrlDownloadToFile, ssilka, file.rasshrenie
 	;#Include 142.ahk
@@ -51,5 +50,4 @@ GuiClose:
 ExitApp
 
 1::
-	adv:=adv
-	MsgBox, adv%a_index%
+	
