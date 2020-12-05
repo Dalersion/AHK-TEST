@@ -59,7 +59,7 @@ if PID = 0
 {
 	Goto,ServerStart
 }
-
+/*
 if PID != 0
 {
 	VarSetCapacity(FileList,0,0)
@@ -70,7 +70,7 @@ if PID != 0
 	VarSetCapacity(Site_Numb,0,0)
 	VarSetCapacity(text,0,0)
 }
-
+*/
 exitt(reason, code)
 {
 	global PID

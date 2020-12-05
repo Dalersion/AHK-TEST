@@ -25,7 +25,6 @@ IniRead, Site_Numb, %INI_File%, Sites, kolvo, 0
 
 if(Site_Numb = 0){
 	MsgBox,,ERROR!, 0 Site Pages Found,
-	ExitApp, 1
 }
 
 loop, %Site_Numb%
@@ -58,17 +57,6 @@ run, HTTP.ahk,,,PID
 if PID = 0
 {
 	Goto,ServerStart
-}
-
-if PID != 0
-{
-	VarSetCapacity(FileList,0,0)
-	VarSetCapacity(INI_File,0,0)
-	VarSetCapacity(INI_Path,0,0)
-	VarSetCapacity(name,0,0)
-	VarSetCapacity(name2,0,0)
-	VarSetCapacity(Site_Numb,0,0)
-	VarSetCapacity(text,0,0)
 }
 
 exitt(reason, code)

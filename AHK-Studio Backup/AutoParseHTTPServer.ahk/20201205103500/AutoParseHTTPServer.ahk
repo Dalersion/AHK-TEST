@@ -70,7 +70,6 @@ if PID != 0
 	VarSetCapacity(Site_Numb,0,0)
 	VarSetCapacity(text,0,0)
 }
-
 exitt(reason, code)
 {
 	global PID

@@ -1,3 +1,5 @@
 paths := {}
-#Include Sites\jopa.ahk
+#Include C:\Users\Dalersion\Documents\GitHub\AHK-TEST\Sites\jopa.ahk
+#Include C:\Users\Dalersion\Documents\GitHub\AHK-TEST\Sites\jopa2.ahk
 paths["/jopa"] := Func("jopa")
+paths["/jopa2"] := Func("jopa2")

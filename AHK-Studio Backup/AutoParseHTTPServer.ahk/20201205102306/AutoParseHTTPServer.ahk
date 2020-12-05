@@ -1,18 +1,23 @@
-﻿#NoEnv 
-SendMode Input  
-SetWorkingDir %A_ScriptDir%  
+﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+; #Warn  ; Enable warnings to assist with detecting common errors.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Persistent
 #SingleInstance,Force
+;#Include AHKhttp.ahk
+;#Include AHKSock.ahk
+;#Include Paths.txt
 INI_Path = %A_ScriptDir% ;by Default %A_AppData%/Dalersion/Sites
 INI_File := INI_Path . "\Sites.ini"
-FileList =
-OnExit("exitt")
+FileList = ; Очистить переменную.
+OnExit(exit)
+
 
 Loop, %A_ScriptDir%/Sites/*.ahk
 	FileList = %FileList%%A_LoopFileName%`n
 Loop, parse, FileList, `n
 {
-	if A_LoopField = 
+	if A_LoopField = ; Игнорировать пустую строку в конце списка.
 		continue
 	IniWrite,%A_LoopField%, %INI_File%, Sites, %A_Index%
 	IniWrite, %A_Index%, %INI_File%, Sites, kolvo
@@ -21,12 +26,14 @@ Loop, parse, FileList, `n
 FileDelete, Paths.txt
 FileAppend, paths := {}`n, Paths.txt
 
+
 IniRead, Site_Numb, %INI_File%, Sites, kolvo, 0
 
 if(Site_Numb = 0){
 	MsgBox,,ERROR!, 0 Site Pages Found,
-	ExitApp, 1
 }
+
+
 
 loop, %Site_Numb%
 {
@@ -38,6 +45,10 @@ loop, %Site_Numb%
 	FileAppend, %Text%, Paths.txt,
 	FileAppend, `n, Paths.txt
 }
+
+
+
+
 
 loop, %Site_Numb%
 {
@@ -59,21 +70,22 @@ if PID = 0
 {
 	Goto,ServerStart
 }
+;Include Paths.txt
+;#IncludeAgain Paths.txt
+;paths := {}
+;paths["/"] := Func("HelloWorld")
 
-if PID != 0
-{
-	VarSetCapacity(FileList,0,0)
-	VarSetCapacity(INI_File,0,0)
-	VarSetCapacity(INI_Path,0,0)
-	VarSetCapacity(name,0,0)
-	VarSetCapacity(name2,0,0)
-	VarSetCapacity(Site_Numb,0,0)
-	VarSetCapacity(text,0,0)
-}
 
-exitt(reason, code)
+
+/*
+	server := new HttpServer()
+	server.LoadMimes(A_ScriptDir . "/mime.types")
+	server.SetPaths(paths)
+	server.Serve(80)
+	return
+*/
+exit(reason, code,ByRef PID)
 {
-	global PID
 	Process, Close, %PID%
-	Exit
+	ExitApp
 }
