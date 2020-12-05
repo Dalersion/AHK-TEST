@@ -27,5 +27,5 @@ HelloWorld(ByRef req, ByRef res) {
     res.status := 200
 }
 
-#include AHKhttp.ahk
-#include AHKSock.ahk
+#include, %A_ScriptDir%\AHKhttp.ahk
+#include <AHKsock>

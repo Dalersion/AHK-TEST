@@ -1,0 +1,1 @@
+logg("That's nice, dear.")

@@ -1,0 +1,1 @@
+﻿MsgBox, 1,1,%A_AppData%,0
